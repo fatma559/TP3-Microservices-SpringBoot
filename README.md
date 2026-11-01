@@ -1,7 +1,7 @@
 # TP3 : Microservices « Calculatrice » avec Spring Boot
 
 **Matière :** Architecture MicroServices | **Filière :** MPSRCC1
-**Étudiante :** Fatma Chérif | **Année universitaire :** 2026-2027
+**Étudiante :** Fatma Cherif | **Année universitaire :** 2026-2027
 
 ## 1. Structure du dépôt
 
@@ -41,7 +41,7 @@ com.exemple.calcul
 
 ### Lancement de calcul-service
 
-![Console calcul-service](captures/console-8081.png)
+![Console calcul-service](Captures/console-8081.png)
 
 Le Tomcat embarqué démarre sur le port 8081.
 
@@ -71,11 +71,11 @@ Le Tomcat embarqué démarre sur le port 8081.
 
 Test dans le navigateur : `http://localhost:8081/calcul/somme?a=2&b=3`
 
-![somme dans Chrome](captures/somme-chrome.png)
+![somme dans Chrome](Captures/somme-chrome.png)
 
 **Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **[405 Method Not Allowed : à vérifier sur ta capture]**, car la méthode n'est mappée que sur `GET`. [Au TP2, le statut était **[à comparer avec ton TP2]**.]
 
-![POST dans Postman](captures/post-405.png)
+![POST dans Postman](Captures/post-405.png)
 
 ## 5. Partie D : Calculatrice complète
 
@@ -89,13 +89,13 @@ Test dans le navigateur : `http://localhost:8081/calcul/somme?a=2&b=3`
 
 Division par zéro :
 
-![division par 0](captures/division-400.png)
+![division par 0](Captures/division-400.png)
 
 ### Observations (D.3)
 
 Paramètre `b` absent, puis paramètre `a` non entier :
 
-![paramètres invalides](captures/parametres-400.png)
+![paramètres invalides](Captures/parametres-400.png)
 
 **Question D.1.** Spring renvoie **400 Bad Request** quand un paramètre est absent ou n'est pas un entier : la méthode n'est pas exécutée. Au TP2, JAX-RS donnait 0 à un entier absent et calculait quand même. L'attitude de Spring est la plus conforme à REST : une requête incomplète ou invalide est une erreur du client, et on le lui signale au lieu de produire un résultat faux.
 
@@ -114,13 +114,13 @@ Pour lire l'identifiant dans `/operations/{id}`, on utilise **`@PathVariable`**,
 
 `GET /calcul/somme/detail?a=2&b=3` :
 
-![JSON détaillé](captures/json-detail.png)
+![JSON détaillé](Captures/json-detail.png)
 
 ### En-tête Accept
 
 Requête avec `Accept: application/json` (200), puis avec `Accept: application/xml` (406) :
 
-![Accept json et xml](captures/accept-406.png)
+![Accept json et xml](Captures/accept-406.png)
 
 **Question E.1.** Oui, les deux JSON sont équivalents pour un client : un objet JSON est un ensemble de paires clé/valeur non ordonnées, seul le contenu compte. Cette fois, la conversion a été faite par **Jackson**, inclus dans `spring-boot-starter-webmvc` (au TP2, c'était JSON-B).
 

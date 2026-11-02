@@ -6,7 +6,7 @@
 ## 1. Structure du dépôt
 
 ```
-tp3/
+Captures/
 ├── calcul-service/        (port 8081)
 ├── historique-service/    (port 8082)
 ├── captures/
@@ -26,7 +26,7 @@ tp3/
 
 ## 3. Partie B : Création de `calcul-service`
 
-Projet généré avec Spring Initializr : Maven, Java [17 ou 21], Spring Boot 4.0.9, Group `com.exemple`, Artifact `calcul-service`, Package `com.exemple.calcul`, Packaging Jar, dépendance Spring Web.
+Projet généré avec Spring Initializr : Maven, Java 21, Spring Boot 4.0.9, Group `com.exemple`, Artifact `calcul-service`, Package `com.exemple.calcul`, Packaging Jar, dépendance Spring Web.
 
 Structure :
 ```
@@ -73,7 +73,7 @@ Test dans le navigateur : `http://localhost:8081/calcul/somme?a=2&b=3`
 
 ![somme dans Chrome](Captures/somme-chrome.png)
 
-**Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **[405 Method Not Allowed : à vérifier sur ta capture]**, car la méthode n'est mappée que sur `GET`. [Au TP2, le statut était **[à comparer avec ton TP2]**.]
+**Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **[405 Method Not Allowed : à vérifier sur ta capture]**, car la méthode n'est mappée que sur `GET`. [Au TP2, le statut était ****Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **405 Method Not Allowed**, car la méthode n'est mappée que sur `GET`. [Au TP2, ...]**.]
 
 ![POST dans Postman](Captures/post-405.png)
 
@@ -99,7 +99,7 @@ Paramètre `b` absent, puis paramètre `a` non entier :
 
 **Question D.1.** Spring renvoie **400 Bad Request** quand un paramètre est absent ou n'est pas un entier : la méthode n'est pas exécutée. Au TP2, JAX-RS donnait 0 à un entier absent et calculait quand même. L'attitude de Spring est la plus conforme à REST : une requête incomplète ou invalide est une erreur du client, et on le lui signale au lieu de produire un résultat faux.
 
-**Question D.2.** Le JSON d'erreur contient les champs : **[timestamp, status, error, path : à vérifier sur ta capture]**.
+**Question D.2.** Le JSON d'erreur contient les champs : **timestamp, status, error, path**.
 
 **Question D.3.**
 
@@ -125,6 +125,14 @@ Requête avec `Accept: application/json` (200), puis avec `Accept: application/x
 **Question E.1.** Oui, les deux JSON sont équivalents pour un client : un objet JSON est un ensemble de paires clé/valeur non ordonnées, seul le contenu compte. Cette fois, la conversion a été faite par **Jackson**, inclus dans `spring-boot-starter-webmvc` (au TP2, c'était JSON-B).
 
 **Question E.2.** Spring compare l'en-tête `Accept` du client avec les formats que l'application sait produire. Jackson ne produit que du JSON et aucun convertisseur XML n'est présent, donc aucun format ne convient : Spring répond **406 Not Acceptable**, même si le code ne mentionne aucun format.
+
+### Exercice E.4 : `divisionDetail`
+
+| Requête | Statut | Corps |
+|---|---|---|
+| `GET /calcul/division/detail?a=6&b=3` | 200 | `{"operation":"division","a":6,"b":3,"resultat":2.0}` |
+| `GET /calcul/division/detail?a=6&b=0` | 400 | (vide) |
+
 ## 7. Partie F : `historique-service`
 
 ### Démarrage des deux microservices
@@ -287,9 +295,3 @@ Il n'y a plus de déploiement : chaque `.jar` contient l'application et son Tomc
 
 La réponse n'est pas différente de celle du TP2 : le comportement HTTP est le même, seule la mise en œuvre (Spring Boot à la place de JAX-RS) change.
 
-### Exercice E.4 : `divisionDetail`
-
-| Requête | Statut | Corps |
-|---|---|---|
-| `GET /calcul/division/detail?a=6&b=3` | 200 | `{"operation":"division","a":6,"b":3,"resultat":2.0}` |
-| `GET /calcul/division/detail?a=6&b=0` | 400 | (vide) |

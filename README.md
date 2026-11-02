@@ -3,13 +3,14 @@
 **Matière :** Architecture MicroServices | **Filière :** MPSRCC1
 **Étudiante :** Fatma Cherif | **Année universitaire :** 2026-2027
 
+
 ## 1. Structure du dépôt
 
 ```
-Captures/
+TP3-Microservices-SpringBoot/
 ├── calcul-service/        (port 8081)
 ├── historique-service/    (port 8082)
-├── captures/
+├── Captures/
 └── README.md
 ```
 
@@ -73,7 +74,7 @@ Test dans le navigateur : `http://localhost:8081/calcul/somme?a=2&b=3`
 
 ![somme dans Chrome](Captures/somme-chrome.png)
 
-**Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **[405 Method Not Allowed : à vérifier sur ta capture]**, car la méthode n'est mappée que sur `GET`. [Au TP2, le statut était ****Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **405 Method Not Allowed**, car la méthode n'est mappée que sur `GET`. [Au TP2, ...]**.]
+**Question C.2.** Un `POST` sur `/calcul/somme` renvoie le statut **405 Method Not Allowed**, car la méthode n'est mappée que sur `GET`. C'est le même statut qu'au TP2 : un verbe HTTP non pris en charge par la ressource est refusé.
 
 ![POST dans Postman](Captures/post-405.png)
 
